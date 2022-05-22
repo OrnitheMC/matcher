@@ -460,17 +460,17 @@ public class FileMenu extends Menu {
 	}
 
 	private static List<ExtensionFilter> getNesterMappingsLoadExtensionFilters() {
-		return Arrays.asList(new FileChooser.ExtensionFilter("Nester Mappings", "*.nest"));
+		return List.of(new ExtensionFilter("Nester Mappings", "*.nest"));
 	}
 
 	private void saveNesterMappings() {
-		SelectedFile res = Gui.requestFile("Save Nester mappings file", gui.getScene().getWindow(), Arrays.asList(new FileChooser.ExtensionFilter("Nester Mappings", "*.nest")), false);
+		SelectedFile res = Gui.requestFile("Save Nester mappings file", gui.getScene().getWindow(), List.of(new ExtensionFilter("Nester Mappings", "*.nest")), false);
 		if (res == null) return;
 
 		Path path = res.path;
 
 		if (!path.getFileName().toString().toLowerCase(Locale.ENGLISH).endsWith(".nest")) {
-			path = path.resolveSibling(path.getFileName().toString()+".nest");
+			path = path.resolveSibling(path.getFileName() +".nest");
 		}
 
 		try {
@@ -486,7 +486,6 @@ public class FileMenu extends Menu {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return;
 		}
 	}
 

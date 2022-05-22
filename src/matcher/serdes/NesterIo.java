@@ -27,7 +27,7 @@ public class NesterIo {
 				String[] args = line.split("\\s");
 
 				if (args.length != 6) {
-					System.err.println("Incorrect number of arguments for mapping \'" + line + "\' - expected 6, got " + args.length + "...");
+					System.err.println("Incorrect number of arguments for mapping '" + line + "' - expected 6, got " + args.length + "...");
 					continue;
 				}
 
@@ -39,11 +39,11 @@ public class NesterIo {
 				String accessString = args[5];
 
 				if (className == null || className.isEmpty()) {
-					System.err.println("Invalid mapping \'" + line + "\': missing class name argument!");
+					System.err.println("Invalid mapping '" + line + "': missing class name argument!");
 					continue;
 				}
 				if (enclClassName == null || enclClassName.isEmpty()) {
-					System.err.println("Invalid mapping \'" + line + "\': missing enclosing class name argument!");
+					System.err.println("Invalid mapping '" + line + "': missing enclosing class name argument!");
 					continue;
 				}
 
@@ -68,7 +68,7 @@ public class NesterIo {
 				}
 
 				if (access == null || access < 0) {
-					System.err.println("Invalid mapping \'" + line + "\': invalid access flags!");
+					System.err.println("Invalid mapping '" + line + "': invalid access flags!");
 					continue;
 				}
 
@@ -84,14 +84,14 @@ public class NesterIo {
 		ClassInstance clazz = env.getClsByNameB(className);
 
 		if (clazz == null) {
-			System.err.println("ignoring mapping for class \'" + className + "\': class does not exist!");
+			System.err.println("ignoring mapping for class '" + className + "': class does not exist!");
 			return;
 		}
 
 		ClassInstance enclClass = env.getClsByNameB(enclClassName);
 
 		if (enclClass == null) {
-			System.err.println("ignoring mapping for class \'" + className + "\': enclosing class \'" + enclClassName + "\' does not exist!");
+			System.err.println("ignoring mapping for class '" + className + "': enclosing class '" + enclClassName + "' does not exist!");
 			return;
 		}
 
@@ -101,7 +101,7 @@ public class NesterIo {
 			enclMethod = enclClass.getMethod(enclMethodName, enclMethodDesc);
 
 			if (enclMethod == null) {
-				System.err.println("ignoring mapping for class \'" + className + "\': enclosing method \'" + enclMethodName + "\' does not exist!");
+				System.err.println("ignoring mapping for class '" + className + "': enclosing method '" + enclMethodName + "' does not exist!");
 				return;
 			}
 		}

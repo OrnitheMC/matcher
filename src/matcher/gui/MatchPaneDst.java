@@ -498,7 +498,7 @@ public class MatchPaneDst extends SplitPane implements IFwdGuiComponent, ISelect
 	}
 
 	private static Comparator<NestRankResult> getNestScoreComparator() {
-		return Comparator.<NestRankResult>comparingInt(r -> r.getScore()).reversed();
+		return Comparator.comparingInt(NestRankResult::getScore).reversed();
 	}
 
 	private void updateMatchResults(Matchable<?> oldSelection) {
@@ -639,13 +639,9 @@ public class MatchPaneDst extends SplitPane implements IFwdGuiComponent, ISelect
 
 	private void addResult(NestRankResult result, List<NestRankResult> classResults, List<NestRankResult> methodResults) {
 		switch (result.getSubject().getKind()) {
-		case CLASS:
-			classResults.add(result);
-			break;
-		case METHOD:
-			methodResults.add(result);
-			break;
-		default:
+			case CLASS -> classResults.add(result);
+			case METHOD -> methodResults.add(result);
+			default -> { }
 		}
 	}
 
@@ -1017,12 +1013,12 @@ public class MatchPaneDst extends SplitPane implements IFwdGuiComponent, ISelect
 		}
 
 		void onNestSelect(boolean force) {
-			Matchable<?> newSrcSelection = srcPane.getSelectedClass();
+			ClassInstance newSrcSelection = srcPane.getSelectedClass();
 			boolean srcSelectionChanged = (newSrcSelection != oldSrcSelection);
 
 			if (!srcSelectionChanged && !force) return;
 
-			methodMatchList.setDisable(newSrcSelection != null && newSrcSelection instanceof ClassInstance && !((ClassInstance)newSrcSelection).equiv.canBeAnonymous());
+			methodMatchList.setDisable(newSrcSelection != null && !newSrcSelection.equiv.canBeAnonymous());
 
 			// update dst selection
 			NestRankResult dstMethodResult = methodMatchList.getSelectionModel().getSelectedItem();
@@ -1062,13 +1058,10 @@ public class MatchPaneDst extends SplitPane implements IFwdGuiComponent, ISelect
 
 			if (newSrcSelection == null) { // no class selected
 				return;
-			} else if (newSrcSelection instanceof ClassInstance) { // unmatched class
-				ClassInstance cls = (ClassInstance) newSrcSelection;
-				ClassInstance equiv = cls.equiv;
+			} else { // unmatched class
+				ClassInstance equiv = newSrcSelection.equiv;
 
 				ranker = () -> NestedClassClassifier.rank(equiv, cmpClasses, selectedClassResult);
-			} else {
-				throw new IllegalStateException();
 			}
 
 			final int cTaskId = ++taskId;

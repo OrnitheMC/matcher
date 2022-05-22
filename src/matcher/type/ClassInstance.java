@@ -1323,8 +1323,7 @@ public final class ClassInstance implements Matchable<ClassInstance> {
 				return true;
 			}
 		}
-		if (m instanceof ClassInstance) {
-			ClassInstance c = (ClassInstance)m;
+		if (m instanceof ClassInstance c) {
 
 			if (c.outerClass != null) {
 				if (this == c.outerClass || encloses(c.outerClass)) {
@@ -1337,9 +1336,7 @@ public final class ClassInstance implements Matchable<ClassInstance> {
 			if (nest != null) {
 				m = nest.get();
 
-				if (m == this || encloses(m)) {
-					return true;
-				}
+				return m == this || encloses(m);
 			}
 		}
 

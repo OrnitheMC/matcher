@@ -7,6 +7,8 @@ import javafx.stage.Window;
 import matcher.config.ProjectConfig;
 
 public class NewProjectTab extends Tab {
+	private final NewProjectPane content;
+
 	public NewProjectTab(ProjectConfig config, Window window, Node okButton, boolean forNester) {
 		content = new NewProjectPane(config, window, okButton, forNester);
 
@@ -18,6 +20,4 @@ public class NewProjectTab extends Tab {
 	public ProjectConfig createConfig() {
 		return content.createConfig();
 	}
-
-	private final NewProjectPane content;
 }

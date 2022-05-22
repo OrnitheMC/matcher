@@ -10,6 +10,8 @@ import matcher.gui.Gui;
 import matcher.type.ClassInstance;
 
 public class NestingMenu extends Menu {
+	private final Gui gui;
+
 	NestingMenu(Gui gui) {
 		super("Nesting");
 
@@ -50,7 +52,7 @@ public class NestingMenu extends Menu {
 		gui.runProgressTask(
 				"Auto nesting...",
 				p -> gui.getNester().autoNestAll(p),
-				() -> gui.onNestChange(),
+				gui::onNestChange,
 				Throwable::printStackTrace);
 	}
 
@@ -58,7 +60,7 @@ public class NestingMenu extends Menu {
 		gui.runProgressTask(
 				"Auto nesting...",
 				p -> gui.getNester().autoNestAll(minScore, p),
-				() -> gui.onNestChange(),
+				gui::onNestChange,
 				Throwable::printStackTrace);
 	}
 
@@ -72,16 +74,14 @@ public class NestingMenu extends Menu {
 						gui.getNester().autoNestClass(clazz.equiv);
 					}
 				},
-				() -> gui.onNestChange(),
+				gui::onNestChange,
 				Throwable::printStackTrace);
 	}
 
 	public void filterAll() {
 		gui.runProgressTask("Re-evaluating potential nests...", 
-				p -> {
-					gui.getNester().invalidatePotentialScores();
-				},
-				() -> gui.onNestChange(),
+				p -> gui.getNester().invalidatePotentialScores(),
+				gui::onNestChange,
 				Throwable::printStackTrace);
 	}
 
@@ -95,6 +95,4 @@ public class NestingMenu extends Menu {
 						status.innerClassCount, status.nestedClassCount, (status.nestedClassCount == 0 ? 0 : 100. * status.innerClassCount / status.nestedClassCount)
 						));
 	}
-
-	private final Gui gui;
 }

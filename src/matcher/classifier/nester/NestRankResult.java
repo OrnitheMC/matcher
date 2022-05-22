@@ -4,6 +4,10 @@ import matcher.classifier.IRankResult;
 import matcher.type.Matchable;
 
 public class NestRankResult implements IRankResult, Comparable<NestRankResult> {
+	private final Matchable<?> subject;
+	private final NestType type;
+	private final int score;
+
 	public static NestRankResult yes(Matchable<?> subject, NestType type) {
 		return maybe(subject, type, 100);
 	}
@@ -34,8 +38,7 @@ public class NestRankResult implements IRankResult, Comparable<NestRankResult> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj != null && obj instanceof NestRankResult) {
-			NestRankResult result = (NestRankResult)obj;
+		if (obj instanceof NestRankResult result) {
 			return subject == result.subject;
 		}
 
@@ -88,8 +91,4 @@ public class NestRankResult implements IRankResult, Comparable<NestRankResult> {
 	public int getScore() {
 		return score;
 	}
-
-	private final Matchable<?> subject;
-	private final NestType type;
-	private final int score;
 }

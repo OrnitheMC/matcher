@@ -1,15 +1,7 @@
 package matcher.classifier.nester;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import matcher.type.ClassInstance;
 import matcher.type.FieldInstance;
@@ -401,11 +393,7 @@ public class NestedClassClassifier {
 	}
 
 	public List<NestRankResult> finalizeResults() {
-		List<NestRankResult> finalResults = new ArrayList<>();
-
-		for (NestRankResult result : results.values()) {
-			finalResults.add(result);
-		}
+		List<NestRankResult> finalResults = new ArrayList<>(results.values());
 
 		Set<ClassInstance> unrankedClasses = new HashSet<>(clazz.getEnv().getClasses());
 
@@ -417,11 +405,8 @@ public class NestedClassClassifier {
 		}
 
 		if (selectedClass != null) {
-			Set<MethodInstance> unrankedMethods = new HashSet<>();
 
-			for (MethodInstance method : selectedClass.getMethods()) {
-				unrankedMethods.add(method);
-			}
+			Set<MethodInstance> unrankedMethods = new HashSet<>(Arrays.asList(selectedClass.getMethods()));
 
 			unrankedMethods.removeAll(results.keySet());
 

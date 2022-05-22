@@ -8,6 +8,9 @@ import matcher.type.MemberInstance;
 import matcher.type.MethodInstance;
 
 public class Nest {
+	private final Matchable<?> subject;
+	private final NestType type;
+
 	public Nest(Matchable<?> subject, NestType type) {
 		this.subject = subject;
 		this.type = type;
@@ -18,11 +21,10 @@ public class Nest {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null || !(obj instanceof Nest)) {
+		if (!(obj instanceof Nest nest)) {
 			return false;
 		}
 
-		Nest nest = (Nest)obj;
 		return type == nest.type && subject == nest.subject;
 	}
 
@@ -62,7 +64,4 @@ public class Nest {
 	public NestType getType() {
 		return type;
 	}
-
-	private final Matchable<?> subject;
-	private final NestType type;
 }
