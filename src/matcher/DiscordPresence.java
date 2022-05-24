@@ -55,7 +55,7 @@ public class DiscordPresence
 
         String dstClassName;
         if (matcher.getDstPane().getSelectedClass() != null) {
-            dstClassName = ClassInstance.getClassName(matcher.getSrcPane().getSelectedClass().getName());
+            dstClassName = ClassInstance.getClassName(matcher.getDstPane().getSelectedClass().getName());
         } else dstClassName = "null";
 
         builder.setState("Comparing classes " + ClassInstance.getClassName(matcher.getSrcPane().getSelectedClass().getName()) +
