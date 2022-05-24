@@ -21,6 +21,7 @@ public class Nester {
 	public void init(ProjectConfig config, DoubleConsumer progressReceiver) {
 		try {
 			env.init(config, progressReceiver);
+			DiscordPresence.setProject(DiscordPresence.ProjectType.NESTING);
 
 			findPotentialNests();
 		} catch (Throwable t) {

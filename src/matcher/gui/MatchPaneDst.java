@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+import matcher.DiscordPresence;
 import matcher.NameType;
 import matcher.classifier.ClassClassifier;
 import matcher.classifier.ClassifierLevel;
@@ -478,6 +479,13 @@ public class MatchPaneDst extends SplitPane implements IFwdGuiComponent, ISelect
 	@Override
 	public void onNestChange() {
 		srcListener.onNestSelect(true);
+	}
+
+	@Override
+	public void onClassSelect(ClassInstance c) {
+		IFwdGuiComponent.super.onClassSelect(c);
+
+		DiscordPresence.updateState();
 	}
 
 	@Override

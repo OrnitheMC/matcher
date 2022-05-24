@@ -49,6 +49,10 @@ dependencies {
 	implementation 'org.benf:cfr:0.152'
 	implementation "net.fabricmc:fabric-fernflower:1.5.0"
 	implementation "net.fabricmc:mapping-io:0.3.0"
+	implementation 'org.json:json:20220320'
+	implementation 'org.slf4j:slf4j-api:1.7.36'
+	implementation 'com.kohlschutter.junixsocket:junixsocket-common:2.4.0'
+	implementation 'com.kohlschutter.junixsocket:junixsocket-native-common:2.4.0'
 }
 
 extraJavaModuleInfo {

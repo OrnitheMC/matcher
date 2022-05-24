@@ -59,6 +59,7 @@ public class Matcher {
 	public void init(ProjectConfig config, DoubleConsumer progressReceiver) {
 		try {
 			env.init(config, progressReceiver);
+			DiscordPresence.setProject(DiscordPresence.ProjectType.MATCHING);
 
 			matchUnobfuscated();
 		} catch (Throwable t) {

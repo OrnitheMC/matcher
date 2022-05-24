@@ -27,6 +27,11 @@ module matcher {
 	requires org.objectweb.asm.util;
 	requires procyon.compilertools;
 	requires net.fabricmc.mappingio;
+    requires java.management;
+    requires org.slf4j;
+	requires org.json;
+	requires org.newsclub.net.unix;
+	requires com.kohlschutter.junixsocket.nativecommon;
 
 	uses matcher.Plugin;
 }

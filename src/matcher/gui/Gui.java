@@ -38,6 +38,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
+import matcher.DiscordPresence;
 import matcher.Matcher;
 import matcher.NameType;
 import matcher.Nester;
@@ -50,6 +51,7 @@ public class Gui extends Application {
 	@Override
 	public void start(Stage stage) {
 		Matcher.init();
+		DiscordPresence.initialize(this);
 
 		env = new ClassEnvironment();
 		matcher = new Matcher(env);
@@ -99,6 +101,7 @@ public class Gui extends Application {
 	@Override
 	public void stop() throws Exception {
 		threadPool.shutdown();
+		DiscordPresence.close();
 	}
 
 	public ClassEnvironment getEnv() {
