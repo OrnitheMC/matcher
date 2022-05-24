@@ -51,9 +51,16 @@ public class DiscordPresence
         RichPresence.Builder builder = new RichPresence.Builder();
         builder.setDetails(activeType.getDescription())
               .setLargeImage(activeType.imageKey, activeType.description)
-              .setState("Comparing classes " + ClassInstance.getClassName(matcher.getSrcPane().getSelectedClass().getName()) +
-                    " -> " + ClassInstance.getClassName(matcher.getDstPane().getSelectedClass().getName()))
               .setStartTimestamp(startTime);
+
+        String dstClassName;
+        if (matcher.getDstPane().getSelectedClass() != null) {
+            dstClassName = ClassInstance.getClassName(matcher.getSrcPane().getSelectedClass().getName());
+        } else dstClassName = "null";
+
+        builder.setState("Comparing classes " + ClassInstance.getClassName(matcher.getSrcPane().getSelectedClass().getName()) +
+                " -> " + dstClassName);
+
         CLIENT.sendRichPresence(builder.build());
     }
 
